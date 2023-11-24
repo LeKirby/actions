@@ -3,9 +3,6 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    network_mode: container:$HTTPD_ID
-    build: .
-    #command: composer test
+    network_mode: host
+    #build: .
     tty: true
-    volumes:
-      - ./:/var/www/html
