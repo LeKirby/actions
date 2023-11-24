@@ -4,5 +4,5 @@ services:
   php-custom:
     image: nginx
     network_mode: host
-    #build: .
+    build: .
     tty: true
