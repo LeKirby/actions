@@ -18,7 +18,7 @@ jobs:
         run: sleep 5 && curl -v http://localhost:80/manifest.json
         
       - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --exit-code-from php-custom --detach
+        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
 
       - name: Docker Inspect
         run: docker inspect
