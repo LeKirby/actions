@@ -6,7 +6,7 @@ services:
     networks:
       - network1
     build: .
-    #tty: true
+    tty: true
 
 networks:
   network1:
