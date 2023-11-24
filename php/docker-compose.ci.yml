@@ -3,7 +3,7 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    network_mode: bridge
+    #network_mode: bridge
     build: .
     #command: composer test
     tty: true
