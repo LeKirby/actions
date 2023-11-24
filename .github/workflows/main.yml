@@ -25,3 +25,6 @@ jobs:
 
       - name: Docker Inspect v2
         run: docker network ls
+        
+      - name: Docker Inspect v3
+        run: docker inspect php_php-custom_1
