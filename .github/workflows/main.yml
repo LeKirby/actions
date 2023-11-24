@@ -19,16 +19,7 @@ jobs:
         
       - name: Logging job
         run: echo "${{ toJSON(job) }}"
-
-      - name: Exporting service container id
-        run: export HTTPD_ID=${{ job.services.httpd.id }}
-
-      - name: Exporting service container network
-        run: export NETWORK_ID=${{ job.services.httpd.network }}
-
-      - name: Testing export
-        run: printenv
         
       - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
+        run: HTTPD_ID=${{ job.services.httpd.id }} | docker-compose -f ./php/docker-compose.ci.yml up --detach
 
