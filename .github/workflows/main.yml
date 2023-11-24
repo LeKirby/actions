@@ -14,13 +14,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Health Check
+        run: sleep 5 && curl -v http://test-server:80
+        
       - name: Get IP
         run: sleep 10 && nslookup test-server
         env:
           THEIP: httpd
-          
-      #- name: Health Check
-      #  run: sleep 5 && curl -v http://localhost:80/manifest.json
         
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
