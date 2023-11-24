@@ -1,3 +1,3 @@
 FROM massenz/dnsutils:2.3.1
 
-CMD nslookup test-server
+CMD nslookup test-servere
