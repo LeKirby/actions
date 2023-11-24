@@ -8,11 +8,6 @@ jobs:
     services:
       test-server:
         image: httpd:latest
-        #env:
-        #  POSTGRES_DB: postgres_db
-        #  POSTGRES_PASSWORD: postgres_password
-        #  POSTGRES_PORT: 5432
-        #  POSTGRES_USER: postgres_user
         ports:
           - 80:80
         # set health checks to wait until postgres has started
@@ -26,19 +21,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      #- name: Docker Info
-      #  run: docker ps -a
-
-      - name: Install PostgreSQL client   
+      - name: Install packages
         run: |
           sudo apt-get update
-          sudo apt-get install --yes postgresql-client dnsutils
+          sudo apt-get install --yes dnsutils docker
           
-      - name: Test
-        run: dig test-server
-
-      #- name: Logging job
-      #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
+      - name: Check if hostname is resolved successfully
+        run: nslookup test-server
         
       - name: Docker Compose
         run: docker-compose -f ./php/docker-compose.ci.yml up --detach
