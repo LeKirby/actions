@@ -6,6 +6,7 @@ services:
     networks:
       - network1
     build: .
+    command: ls
     tty: true
 
 networks:
