@@ -37,10 +37,6 @@ jobs:
       - name: Test
         run: dig test-server
 
-      - name: Install database
-        run: |
-          psql -h postgres -d postgres_db -U postgres_user -c  'CREATE DATABASE rolling_test;' -U postgres
-          
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
         
