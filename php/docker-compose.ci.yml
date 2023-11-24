@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   php-custom:
-    image: nginx
+    image: alpine
     networks:
       - network1
     build: .
