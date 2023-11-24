@@ -4,7 +4,7 @@ on: push
 jobs:
   runner-job:
     runs-on: ubuntu-latest
-    #container: ubuntu
+    container: ubuntu
     services:
       test-server:
         image: httpd:latest
@@ -15,19 +15,19 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      #- name: Install dnsutils and curl
-      #  run: |
-      #    apt-get update
-      #    apt-get install --yes dnsutils curl
+      - name: Install dnsutils and curl
+        run: |
+          apt-get update
+          apt-get install --yes dnsutils curl
 
-      #- name: Check if hostname is resolved successfully
-      #  run: nslookup test-server
+      - name: Check if hostname is resolved successfully
+        run: nslookup test-server
 
-      #- name: Download docker
-      #  run: curl -fsSL https://get.docker.com -o get-docker.sh
+      - name: Download docker
+        run: curl -fsSL https://get.docker.com -o get-docker.sh
 
-      #- name: Install docker
-      #  run: sh ./get-docker.sh
+      - name: Install docker
+        run: sh ./get-docker.sh
 
       - name: Create env file
         run: |
