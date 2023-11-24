@@ -4,6 +4,7 @@ on: push
 jobs:
   runner-job:
     runs-on: ubuntu-latest
+    container: node:10.18-jessie
     services:
       postgres:
         image: postgres:latest
