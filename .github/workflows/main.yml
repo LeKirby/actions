@@ -30,4 +30,4 @@ jobs:
         run: nslookup test-server
         
       - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
+        run: docker compose -f ./php/docker-compose.ci.yml up --detach
