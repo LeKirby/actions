@@ -22,3 +22,6 @@ jobs:
 
       - name: Docker Inspect
         run: docker ps -a
+
+      - name: Docker Inspect v2
+        run: docker network ls
