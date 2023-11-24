@@ -3,6 +3,7 @@ on: push
 
 jobs:
   runner-job:
+    container: ubuntu-latest
     runs-on: ubuntu-latest
     services:
       test-server:
