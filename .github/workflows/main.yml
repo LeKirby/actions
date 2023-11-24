@@ -35,5 +35,11 @@ jobs:
       - name: Install docker
         run: sh ./get-docker.sh
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo "NETWORK=${{ job.container.network }}" > .env
+          cat .env
+          
       - name: Docker Compose
         run: docker compose -f ./php/docker-compose.ci.yml up --detach
