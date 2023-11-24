@@ -9,7 +9,7 @@ jobs:
         image: httpd
         ports:
           - 80:80
-        options: --name derserver --net=host
+        options: --name derserver
 
     steps:
       - name: Check out repository code
