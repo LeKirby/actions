@@ -5,7 +5,7 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
     services:
-      test-server:
+      postgres:
         image: postgres:latest
         ports:
           - 80:80
@@ -19,6 +19,9 @@ jobs:
 
       - name: Docker Info
         run: docker ps -a
+
+      - name: Test
+        run: dig postgres
         
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
