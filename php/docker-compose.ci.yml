@@ -7,7 +7,7 @@ services:
     build: .
     command: composer test
     tty: true
-    extra_host:
+    extra_hosts:
       - "httpd:0.0.0.0"
     volumes:
       - ./:/var/www/html
