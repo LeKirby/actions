@@ -43,6 +43,3 @@ jobs:
           
       - name: Docker Compose
         run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
-
-      - name: Yeet
-        run: docker logs
