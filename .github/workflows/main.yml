@@ -14,12 +14,17 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Get IP
+        run: echo $THEIP
+        env:
+          THEIP: "das testen wir"
+          
       #- name: Health Check
       #  run: sleep 5 && curl -v http://localhost:80/manifest.json
         
-      - name: Logging job
-        run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
+      #- name: Logging job
+      #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
         
-      - name: Docker Compose
-        run: export HTTPD_ID=${{ job.services.httpd.id }} && export HTTPD_IP=$(docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}) && docker-compose -f ./php/docker-compose.ci.yml up --detach
+      #- name: Docker Compose
+      #  run: export HTTPD_ID=${{ job.services.httpd.id }} && export HTTPD_IP=$(docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}) && docker-compose -f ./php/docker-compose.ci.yml up --detach
 
