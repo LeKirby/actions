@@ -6,7 +6,7 @@ services:
     networks:
       - network1
     build: .
-    command: curl test-servere
+    command: curl test-server
     tty: true
 
 networks:
