@@ -23,8 +23,8 @@ jobs:
 
       - name: Install packages
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes dnsutils docker
+          apt-get update
+          apt-get install --yes dnsutils docker
           
       - name: Check if hostname is resolved successfully
         run: nslookup test-server
