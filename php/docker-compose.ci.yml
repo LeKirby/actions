@@ -3,7 +3,7 @@ version: "3.4"
 services:
   php-custom:
     image: php-custom
-    network_mode: host
+    network_mode: service:httpd
     build: .
     command: composer test
     tty: true
