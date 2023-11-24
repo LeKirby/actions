@@ -1,40 +1,89 @@
-const redis = require("redis");
+import express from "express";
+import path from "path";
+import fs from "fs";
+import mustache from "mustache";
+import dayjs from "dayjs";
 
-// Creates a new Redis client
-// If REDIS_HOST is not set, the default host is localhost
-// If REDIS_PORT is not set, the default port is 6379
-const redisClient = redis.createClient({
-  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+const app = express();
+const port = 3000;
+
+const scheduledGroupId = "Jz0rgEv0epyCb6z58or72";
+
+app.get("/:fileName", (req, res) => {
+  const { fileName } = req.params;
+  if (fileName === `${scheduledGroupId}.json`) {
+    const template = fs.readFileSync(
+      path.resolve(__dirname, "scheduled.mustache"),
+      { encoding: "utf8" }
+    );
+    const fileContents = mustache.render(template, {
+      beforeGlobal: {
+        start: dayjs().add(1, "day").unix() * 1000,
+        end: dayjs().add(3, "day").unix() * 1000,
+      },
+      duringGlobal: {
+        start: dayjs().subtract(1, "day").unix() * 1000,
+        end: dayjs().add(1, "day").unix() * 1000,
+      },
+      afterGlobal: {
+        start: dayjs().subtract(3, "day").unix() * 1000,
+        end: dayjs().subtract(1, "day").unix() * 1000,
+      },
+
+      beforeGlobalStartEnd: {
+        start: dayjs().unix() * 1000,
+        end: dayjs().add(2, "day").unix() * 1000,
+        startTime: getZeroRelativeTime().add(1, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().add(3, "hour").unix() * 1000,
+      },
+      duringGlobalStartEnd: {
+        start: dayjs().unix() * 1000,
+        end: dayjs().add(2, "day").unix() * 1000,
+        startTime: getZeroRelativeTime().subtract(1, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().add(2, "hour").unix() * 1000,
+      },
+      afterGlobalStartEnd: {
+        start: dayjs().subtract(2, "day").unix() * 1000,
+        end: dayjs().unix() * 1000,
+        startTime: getZeroRelativeTime().subtract(3, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().subtract(1, "hour").unix() * 1000,
+      },
+
+      beforeGlobalDaily: {
+        start: dayjs().subtract(1, "day").unix() * 1000,
+        end: dayjs().add(1, "day").unix() * 1000,
+        startTime: getZeroRelativeTime().subtract(3, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().subtract(1, "hour").unix() * 1000,
+      },
+      duringGlobalDaily: {
+        start: dayjs().subtract(1, "day").unix() * 1000,
+        end: dayjs().add(1, "day").unix() * 1000,
+        startTime: getZeroRelativeTime().subtract(1, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().add(1, "hour").unix() * 1000,
+      },
+      afterGlobalDaily: {
+        start: dayjs().subtract(1, "day").unix() * 1000,
+        end: dayjs().add(1, "day").unix() * 1000,
+        startTime: getZeroRelativeTime().subtract(3, "hour").unix() * 1000,
+        endTime: getZeroRelativeTime().subtract(1, "hour").unix() * 1000,
+      },
+    });
+
+    res.send(fileContents);
+  } else {
+    res.sendFile(path.resolve(__dirname, "fixtures", fileName));
+  }
 });
 
-redisClient.on("error", (err) => console.log("Error", err));
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
 
-(async () => {
-  await redisClient.connect();
+function getZeroRelativeTime() {
+  const now = dayjs();
 
-  // Sets the key "octocat" to a value of "Mona the octocat"
-  const setKeyReply = await redisClient.set("octocat", "Mona the Octocat");
-  console.log("Reply: " + setKeyReply);
-  // Sets a key to "species", field to "octocat", and "value" to "Cat and Octopus"
-  const SetFieldOctocatReply = await redisClient.hSet("species", "octocat", "Cat and Octopus");
-  console.log("Reply: " + SetFieldOctocatReply);
-  // Sets a key to "species", field to "dinotocat", and "value" to "Dinosaur and Octopus"
-  const SetFieldDinotocatReply = await redisClient.hSet("species", "dinotocat", "Dinosaur and Octopus");
-  console.log("Reply: " + SetFieldDinotocatReply);
-  // Sets a key to "species", field to "robotocat", and "value" to "Cat and Robot"
-  const SetFieldRobotocatReply = await redisClient.hSet("species", "robotocat", "Cat and Robot");
-  console.log("Reply: " + SetFieldRobotocatReply);
-
-  try {
-    // Gets all fields in "species" key
-    const replies = await redisClient.hKeys("species");
-    console.log(replies.length + " replies:");
-    replies.forEach((reply, i) => {
-        console.log("    " + i + ": " + reply);
-    });
-    await redisClient.quit();
-  }
-  catch (err) {
-    // statements to handle any exceptions
-  }
-})();
+  return dayjs(0)
+    .set("hour", now.hour())
+    .set("minute", now.minute())
+    .set("second", now.second());
+}
