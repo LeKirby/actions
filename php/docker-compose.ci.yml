@@ -6,7 +6,7 @@ services:
     networks:
       - network1
     build: .
-    command: curl 172.18.0.3:80
+    command: curl 172.18.0.2:80
     tty: true
 
 networks:
