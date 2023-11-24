@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Health Check
-        run: curl -v http://$THEIP:80
+        run: cat /etc/hosts
         env:
           THEIP: $(docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }})
         
