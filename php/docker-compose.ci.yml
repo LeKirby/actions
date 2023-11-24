@@ -4,6 +4,8 @@ services:
   php-custom:
     image: nginx
     network_mode: container:derserver
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
     build: .
     #command: composer test
     tty: true
