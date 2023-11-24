@@ -19,3 +19,6 @@ jobs:
         
       - name: Docker Compose
         run: docker-compose -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
+
+      - name: Docker Inspect
+        run: docker inspect
