@@ -6,23 +6,6 @@ jobs:
   runner-job:
     # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
-
-    # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      redis:
-        # Docker Hub image
-        image: httpd
-        # Set health checks to wait until redis has started
-        options: >-
-          --health-cmd "curl --silent --fail http://0.0.0.0:80 || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps port 6379 on service container to the host
-          - 80:80
-
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
@@ -36,7 +19,7 @@ jobs:
       - name: Connect to Redis
         # Runs a script that creates a Redis client, populates
         # the client with data, and retrieves data
-        run: node client.js
+        run: redis-cli ping
         # Environment variable used by the `client.js` script to create
         # a new Redis client.
         env:
