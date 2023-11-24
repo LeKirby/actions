@@ -6,7 +6,7 @@ services:
     networks:
       - network1
     build: .
-    command: nslookup test-server
+    command: cat /etc/resolv.conf
     tty: true
 
 networks:
