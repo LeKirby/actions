@@ -3,6 +3,6 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    network_mode: container:test-server
+    network_mode: service:test-server
     build: .
     tty: true
