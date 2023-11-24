@@ -22,7 +22,16 @@ jobs:
 
       - name: Test
         run: dig postgres
-        
+
+      - name: Install PostgreSQL client   
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+
+      - name: Install database
+        run: |
+          psql -h postgres -d postgres_db -U postgres_user -c  'CREATE DATABASE rolling_test;' -U postgres
+          
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
         
