@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ubuntu
     services:
-      postgres:
+      test-server:
         image: postgres:latest
         env:
           POSTGRES_DB: postgres_db
@@ -35,7 +35,7 @@ jobs:
           apt-get install --yes postgresql-client dnsutils
           
       - name: Test
-        run: dig postgres
+        run: dig test-server
 
       - name: Install database
         run: |
