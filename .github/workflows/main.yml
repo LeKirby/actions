@@ -5,30 +5,20 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
     services:
-      derserver:
+      httpd:
         image: httpd
         ports:
           - 80:80
-        options: --name derserver
 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
+#      - name: Check out repository code
+#        uses: actions/checkout@v4
 
-      - name: Health Check
-        run: sleep 5 && curl -v http://localhost:80/manifest.json
+#      - name: Health Check
+#        run: sleep 5 && curl -v http://localhost:80/manifest.json
         
-      - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
+#      - name: Docker Compose
+#        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
 
-      - name: Docker Inspect
-        run: docker ps -a
-
-      - name: Docker Inspect v2
-        run: docker network ls
-        
-      - name: Docker Inspect v3
-        run: docker inspect php_php-custom_1
-
-      - name: Docker Inspect v4
-        run: docker inspect derserver
+      - name: Docker ping
+        run: ping httpd
