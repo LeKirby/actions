@@ -2,10 +2,10 @@ version: "3.4"
 
 services:
   php-custom:
-    image: php-custom
+    image: nginx
     network_mode: host
     build: .
-    command: composer test
+    #command: composer test
     tty: true
     volumes:
       - ./:/var/www/html
