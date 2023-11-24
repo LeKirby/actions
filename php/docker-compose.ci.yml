@@ -4,8 +4,6 @@ services:
   php-custom:
     image: nginx
     network_mode: container:${{ job.services.httpd.id }}
-    extra_hosts:
-    - "host.docker.internal:host-gateway"
     build: .
     #command: composer test
     tty: true
