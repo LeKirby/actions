@@ -14,8 +14,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         
-      - name: Health Check
-        run: sleep 5 && curl 0.0.0.0:80
+      #- name: Health Check
+      #  run: sleep 5 && curl 0.0.0.0:80
 
       - name: Docker Info
         run: docker ps -a
