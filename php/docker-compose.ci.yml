@@ -3,11 +3,10 @@ version: "3.4"
 services:
   php-custom:
     image: alpine
-    network_mode: host
     networks:
       - network1
     build: .
-    command: nslookup test-server
+    command: curl 172.18.0.3:80
     tty: true
 
 networks:
