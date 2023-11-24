@@ -6,7 +6,7 @@ services:
     networks:
       - network1
     build: .
-    command: ls
+    command: nslookup test-servere
     tty: true
 
 networks:
