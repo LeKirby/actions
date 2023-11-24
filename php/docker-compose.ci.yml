@@ -3,7 +3,7 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    network_mode: container:${{ job.services.httpd.id }}
+    network_mode: container:${job.services.httpd.id}
     build: .
     #command: composer test
     tty: true
