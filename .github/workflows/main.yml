@@ -21,7 +21,7 @@ jobs:
         run: echo "${{ toJSON(job) }}"
 
       - name: Exporting root container name
-        run: export CONTAINER_ID=${{ job.container.id }}
+        run: export CONTAINER_ID=${{ job.services.httpd.id }}
         
       - name: Docker Compose
         run: docker-compose -f ./php/docker-compose.ci.yml up --detach
