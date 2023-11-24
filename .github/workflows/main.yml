@@ -16,6 +16,8 @@ jobs:
 
 #      - name: Health Check
 #        run: sleep 5 && curl -v http://localhost:80/manifest.json
+      - name: Context
+        run: echo ${{ job }}
         
       - name: Docker Compose
         run: docker-compose -f ./php/docker-compose.ci.yml up --detach
