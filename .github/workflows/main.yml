@@ -21,10 +21,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install dnsutils and curl
-        run: |
-          sudo apt-get update
-          sudo apt-get install --yes dnsutils curl
+      #- name: Install dnsutils and curl
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install --yes dnsutils curl
 
       #- name: Check if hostname is resolved successfully
       #  run: nslookup test-server
@@ -42,4 +42,4 @@ jobs:
           cat .env
           
       - name: Docker Compose
-        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --attach-dependencies
+        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
