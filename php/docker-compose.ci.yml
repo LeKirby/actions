@@ -3,11 +3,9 @@ version: "3.4"
 services:
   php-custom:
     image: php-custom
-    environment:
-      - TEST_SERVER_HOST
     build: .
     command: composer test
-    #network_mode: host
+    network_mode: host
     ports:
       - 80:80
     tty: true
