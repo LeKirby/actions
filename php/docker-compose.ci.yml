@@ -4,6 +4,11 @@ services:
   php-custom:
     image: nginx
     networks:
-      - $NETWORK
+      - network1
     build: .
     tty: true
+
+networks:
+  network1:
+    name: $NETWORK
+    external: true
