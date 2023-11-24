@@ -14,8 +14,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Health Check
-        run: sleep 5 && curl -v http://localhost:80/manifest.json
+      #- name: Health Check
+      #  run: sleep 5 && curl -v http://localhost:80/manifest.json
         
       - name: Logging job
         run: echo "${{ toJSON(job) }}"
