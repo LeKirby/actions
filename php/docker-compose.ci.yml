@@ -3,8 +3,6 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    extra_hosts:
-    - "derserver:172.18.0.2"
     network_mode: container:derserver
     build: .
     #command: composer test
