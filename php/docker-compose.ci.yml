@@ -5,7 +5,7 @@ services:
     image: php-custom
     build: .
     command: composer test
-    network_mode: host
+    network: host
     ports:
       - 80:80
     tty: true
