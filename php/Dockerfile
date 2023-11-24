@@ -1,4 +1,4 @@
-FROM php:7.4.33-fpm
+FROM dnsutils:2.3.1
 
 RUN cat /etc/resolv.conf
 
