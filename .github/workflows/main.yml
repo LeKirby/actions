@@ -20,6 +20,5 @@ jobs:
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
         
-      #- name: Docker Compose
-      #  run: export HTTPD_ID=${{ job.services.httpd.id }} && export HTTPD_IP=$(docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}) && docker-compose -f ./php/docker-compose.ci.yml up --detach
-
+      - name: Docker Compose
+        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
