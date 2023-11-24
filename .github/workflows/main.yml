@@ -42,4 +42,4 @@ jobs:
           cat .env
           
       - name: Docker Compose
-        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --attach
+        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --attach-dependencies
