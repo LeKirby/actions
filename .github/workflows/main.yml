@@ -19,4 +19,4 @@ jobs:
         
       - name: Docker Compose
         #--add-host=host.docker.internal:host-gateway --log-level DEBUG --verbose -f ./php/docker-compose.ci.yml up  --exit-code-from php-custom
-        run: docker-compose -h
+        run: docker-compose --log-level DEBUG --verbose -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
