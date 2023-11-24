@@ -17,6 +17,9 @@ jobs:
       - name: Health Check
         run: sleep 10 && curl -v http://localhost:80/manifest.json
         
+      - name: Docker Info
+        run: docker service ls
+        
       - name: Docker Compose
         #--add-host=host.docker.internal:host-gateway --log-level DEBUG --verbose -f ./php/docker-compose.ci.yml up  --exit-code-from php-custom
         run: docker-compose --log-level DEBUG --verbose -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
