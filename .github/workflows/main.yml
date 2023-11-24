@@ -21,13 +21,19 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install packages
+      - name: Install dnsutils
         run: |
           apt-get update
-          apt-get install --yes dnsutils docker-ce
-          
+          apt-get install --yes dnsutils
+
       - name: Check if hostname is resolved successfully
         run: nslookup test-server
-        
+
+      - name: Download docker
+        run: curl -fsSL https://get.docker.com -o get-docker.sh
+
+      - name: Install docker
+        run: sh ./get-docker.sh --dry-run
+
       - name: Docker Compose
         run: docker compose -f ./php/docker-compose.ci.yml up --detach
