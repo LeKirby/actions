@@ -3,6 +3,7 @@ version: "3.4"
 services:
   php-custom:
     image: nginx
-    networks: $NETWORK
+    #networks:
+    #  - $NETWORK
     build: .
     tty: true
