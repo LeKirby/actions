@@ -21,10 +21,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install dnsutils
+      - name: Install dnsutils and curl
         run: |
           apt-get update
-          apt-get install --yes dnsutils
+          apt-get install --yes dnsutils curl
 
       - name: Check if hostname is resolved successfully
         run: nslookup test-server
