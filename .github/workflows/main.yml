@@ -18,5 +18,5 @@ jobs:
 #        run: sleep 5 && curl -v http://localhost:80/manifest.json
         
       - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --detach -e job.services.httpd.id=${{ job.services.httpd.id }}
+        run: docker-compose -f ./php/docker-compose.ci.yml up --detach -e RUNNER_ID=${{ job.container.id }}
 
