@@ -7,15 +7,23 @@ jobs:
     services:
       postgres:
         image: postgres:latest
+        env:
+          POSTGRES_DB: postgres_db
+          POSTGRES_PASSWORD: postgres_password
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres_user
         ports:
-          - 80:80
+          - 5432:5432
+        # set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-        
-      #- name: Health Check
-      #  run: sleep 5 && curl 0.0.0.0:80
 
       - name: Docker Info
         run: docker ps -a
