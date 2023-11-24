@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       test-server:
-        image: httpd
+        image: postgres:latest
         ports:
           - 80:80
 
@@ -16,9 +16,12 @@ jobs:
         
       - name: Health Check
         run: sleep 5 && curl 0.0.0.0:80
+
+      - name: Docker Info
+        run: docker ps -a
         
       #- name: Logging job
       #  run: docker inspect --format '{{ .NetworkSettings.Networks.${{ job.services.httpd.network }}.IPAddress }}' ${{ job.services.httpd.id }}
         
-      - name: Docker Compose
-        run: docker-compose -f ./php/docker-compose.ci.yml up --detach
+      #- name: Docker Compose
+      #  run: docker-compose -f ./php/docker-compose.ci.yml up --detach
