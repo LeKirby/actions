@@ -9,6 +9,7 @@ jobs:
         image: httpd
         ports:
           - 80:80
+        options: --name derserver
 
     steps:
       - name: Check out repository code
@@ -28,3 +29,6 @@ jobs:
         
       - name: Docker Inspect v3
         run: docker inspect php_php-custom_1
+
+      - name: Docker Inspect v4
+        run: docker inspect derserver
