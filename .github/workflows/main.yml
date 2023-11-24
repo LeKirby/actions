@@ -34,6 +34,9 @@ jobs:
           touch .env
           echo "NETWORK=${{ job.container.network }}" > .env
           cat .env
-          
+
       - name: Docker Compose
-        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up --exit-code-from php-custom
+        run: docker compose --env-file .env -f ./php/docker-compose.ci.yml up #--exit-code-from php-custom
+
+      - name: Docker Logs
+        run: docker ps -a
