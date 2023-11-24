@@ -9,7 +9,6 @@ jobs:
         image: httpd
         ports:
           - 80:80
-        options: --name theServer
 
     steps:
       - name: Check out repository code
