@@ -24,7 +24,7 @@ jobs:
       - name: Install packages
         run: |
           apt-get update
-          apt-get install --yes dnsutils docker
+          apt-get install --yes dnsutils docker docker-compose-plugin
           
       - name: Check if hostname is resolved successfully
         run: nslookup test-server
