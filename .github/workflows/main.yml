@@ -26,16 +26,16 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Docker Info
-        run: docker ps -a
-
-      - name: Test
-        run: dig postgres
+      #- name: Docker Info
+      #  run: docker ps -a
 
       - name: Install PostgreSQL client   
         run: |
           sudo apt-get update
           sudo apt-get install --yes postgresql-client
+          
+      - name: Test
+        run: dig postgres
 
       - name: Install database
         run: |
