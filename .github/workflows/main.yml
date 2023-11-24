@@ -33,7 +33,7 @@ jobs:
         run: curl -fsSL https://get.docker.com -o get-docker.sh
 
       - name: Install docker
-        run: sh ./get-docker.sh --dry-run
+        run: sh ./get-docker.sh
 
       - name: Docker Compose
         run: docker compose -f ./php/docker-compose.ci.yml up --detach
