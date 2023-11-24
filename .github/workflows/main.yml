@@ -25,6 +25,9 @@ jobs:
 
       - name: Exporting service container network
         run: export NETWORK_ID=${{ job.services.httpd.network }}
+
+      - name: Testing export
+        run: echo $NETWORK_ID
         
       - name: Docker Compose
         run: docker-compose -f ./php/docker-compose.ci.yml up --detach
